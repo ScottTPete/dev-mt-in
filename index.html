@@ -38,12 +38,12 @@
   <div class="l-container">
     <h2>Friends</h2>
 
-    <button class="l-btn l-btn-main">Go</button>
+    <button class="l-btn l-btn-main" ng-click="findFriends(findFriend.name)">Go</button>
     <input type="text" placeholder="Find Friends" ng-model="findFriend.name">    
     <select ng-model="sortReverse" ng-options="option.value as option.display for option in sortOptions"></select>
     <div class="friendList" ng-repeat="friend in myProfile.friends | filter : findFriend.name | orderBy : name : sortReverse">
-      <span class="closeBtn"></span>
-        {{ friend.name }}
+      <span class="closeBtn" ng-click="removeFriend(friend._id)"></span>
+        {{ friend.name }} 
       <br />
       <div class="secondConnection friendList">
         My Second Connections
@@ -60,16 +60,18 @@
 				</div>
 					<br />
 				<div class="friendList">
-					<span class="friend"></span> Potential Friends
+					<span class="friend" ng-repeat="friend in potentialFriends">
+					<button ng-click="addFriends(friend._id)">Add</button>{{friend.name}} <br></span> 
 				</div>
 			</div>
 		</div>
 	</div>
   
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
   <script src="./app.js"></script>
   <script src="./homeCtrl.js"></script>
   <script src="./profileService.js"></script>
+  <script src="./friendService.js"></script>
 </body>
 
 </html>

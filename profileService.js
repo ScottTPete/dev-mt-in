@@ -5,12 +5,12 @@ app.service('profileService', function($http) {
 	this.saveProfile = function( profile ) {
 		$http({
 			method: 'POST',
-			url: baseUrl + 'api/profiles',
+			url: baseUrl + 'api/profiles/',
 			data: profile
 		})
 		.then(function(profileResponse) {
 			console.log(profileResponse);
-			localStorage.setItem('profileId', JSON.parse({ profileId: profileResponse.data._id}));  
+			localStorage.setItem('profileId', JSON.stringify({ profileId: profileResponse.data._id}));  
 		})
 		.catch(function(err){
 			console.log(err);
@@ -21,7 +21,7 @@ app.service('profileService', function($http) {
 	this.checkForProfile = function(profileId) {
 		return $http({
 			method: 'GET',
-			url: baseUrl +'api/profiles' + profileId
+			url: baseUrl +'api/profiles/' + profileId
 		});
 	}
 
@@ -30,7 +30,7 @@ app.service('profileService', function($http) {
 		
 		return $http({
 			method: 'DELETE',
-			url: baseUrl + 'api/profiles' + profileId
+			url: baseUrl + 'api/profiles/' + profileId
 		});
 	}
 
